@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import _ from "lodash";
 import { Form, Row, Col } from "react-bootstrap";
 import CustomInputField from "./InputField";
+import CustomDropDownField from "./DropDown";
 
 export default function FormComponent() {
   // const [count, setCount] = useState(0);
@@ -13,10 +14,24 @@ export default function FormComponent() {
   });
   const formFields = [
     {
-      type: "CustomInputField",
+      type: "CustomDropDownField",
       placeholder: "Salutation",
       label: "Salutation",
-      component: CustomInputField,
+      component: CustomDropDownField,
+      options: [
+        {
+          value: "Mr.",
+          option: "Mr.",
+        },
+        {
+          value: "Mrs.",
+          option: "Mrs.",
+        },
+        {
+          value: "Ms.",
+          option: "Ms.",
+        },
+      ],
     },
     {
       type: "CustomInputField",
@@ -50,6 +65,14 @@ export default function FormComponent() {
                     <each.component
                       placeholder={each.placeholder}
                       label={each.label}
+                    />
+                  </Col>
+                ) : each.type === "CustomDropDownField" ? (
+                  <Col md="6" lg="6" xs="12" key={`${each.type}-${i}`}>
+                    <each.component
+                      placeholder={each.placeholder}
+                      label={each.label}
+                      options={each.options}
                     />
                   </Col>
                 ) : null
