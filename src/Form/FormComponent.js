@@ -165,7 +165,7 @@ export default function FormComponent() {
     {
       type: "CustomInputField",
       placeholder: "Middle name",
-      name: "Middle name",
+      name: "middle_name_nom",
       label: "Middle name",
       component: CustomInputField,
     },
@@ -208,8 +208,8 @@ export default function FormComponent() {
     {
       type: "CustomDateField",
       label: "Date of Birth",
-      placeholder: "dob_nom",
-      name: "Date of Birth",
+      placeholder: "Date of Birth ",
+      name: "dob_nom",
       component: CustomDateField,
     },
     {
@@ -234,19 +234,41 @@ export default function FormComponent() {
       ],
     },
   ];
-  
+  const initials = {
+    salutation: "",
+    first_name: "",
+    middle_name: "",
+    last_name: "",
+    gender: "",
+    email: "",
+    mobile: "",
+    dob: "",
+    occupation: "",
+    annual_income: "",
+    pan_card: "",
+    marital_status: "",
+    height: "",
+    Weight: "",
+    first_name_nom: "",
+    middle_name_nom: "",
+    last_name_nom: "",
+    relationship: "",
+    dob_nom: "",
+    gender_nom: "",
+  };
   return (
     <>
-      <Form>
-        <Row col="12">
-          <Col md="2" lg="2" xs="0"></Col>
-          <Col md="8" lg="8" xs="12">
-            <InnerFormComponent formFields={formFields} />
-          </Col>
-          <Col></Col>
-          <Col md="2" lg="2" xs="0"></Col>
-        </Row>
-      </Form>
+      <Row col="12">
+        <Col md="2" lg="2" xs="0"></Col>
+        <Col md="8" lg="8" xs="12">
+          <InnerFormComponent
+            formFields={formFields}
+            initialValues={initials}
+          />
+        </Col>
+        <Col></Col>
+        <Col md="2" lg="2" xs="0"></Col>
+      </Row>
     </>
   );
 }
