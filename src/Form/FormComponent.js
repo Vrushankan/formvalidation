@@ -1,17 +1,53 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
-import { Form, Row, Col, Dropdown } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 import InnerFormComponent from "./InnerFormComponent";
 import CustomInputField from "./InputField";
 import CustomDropDownField from "./DropDown";
 import CustomEmailField from "./EmailField";
 import CustomDateField from "./DateField";
-
+const initials = {
+  salutation: {
+    value: "Mr.",
+    option: "Mr.",
+  },
+  first_name: "",
+  middle_name: "",
+  last_name: "",
+  gender: {
+    value: "male",
+    option: "Male",
+  },
+  email: "",
+  mobile: "",
+  dob: "",
+  occupation: "",
+  annual_income: "",
+  pan_card: "",
+  marital_status: {
+    value: "married",
+    option: "Married",
+  },
+  height: "",
+  weight: "",
+  first_name_nom: "",
+  middle_name_nom: "",
+  last_name_nom: "",
+  relationship: {
+    value: "Father",
+    option: "Father",
+  },
+  dob_nom: "",
+  gender_nom: {
+    value: "male",
+    option: "Male",
+  },
+};
 export default function FormComponent() {
   const [formSubmitValues, setformSubmitValues] = useState({});
-  // Similar to componentDidMount and componentDidUpdate:
+  const [formSubmitted, setformSubmitted] = useState(false);
+  const [formInitialData,] = useState(initials);
   useEffect(() => {
-    // Update the document title using the browser API
     document.title = `Form Validation`;
   });
   const formFields = [
@@ -241,43 +277,6 @@ export default function FormComponent() {
       ],
     },
   ];
-  const initials = {
-    salutation: {
-      value: "Mr.",
-      option: "Mr.",
-    },
-    first_name: "",
-    middle_name: "",
-    last_name: "",
-    gender: {
-      value: "male",
-      option: "Male",
-    },
-    email: "",
-    mobile: "",
-    dob: "",
-    occupation: "",
-    annual_income: "",
-    pan_card: "",
-    marital_status: {
-      value: "married",
-      option: "Married",
-    },
-    height: "",
-    weight: "",
-    first_name_nom: "",
-    middle_name_nom: "",
-    last_name_nom: "",
-    relationship: {
-      value: "Father",
-      option: "Father",
-    },
-    dob_nom: "",
-    gender_nom: {
-      value: "male",
-      option: "Male",
-    },
-  };
   return (
     <>
       <Row col="12" noGutters>
@@ -285,12 +284,13 @@ export default function FormComponent() {
         <Col md="8" lg="8" xs="12">
           <InnerFormComponent
             formFields={formFields}
-            initialValues={initials}
+            initialValues={formInitialData}
             formSubmitValues={formSubmitValues}
             setformSubmitValues={setformSubmitValues}
+            formSubmitted={formSubmitted}
+            setformSubmitted={setformSubmitted}
           />
         </Col>
-        <Col></Col>
         <Col md="2" lg="2" xs="0"></Col>
       </Row>
     </>

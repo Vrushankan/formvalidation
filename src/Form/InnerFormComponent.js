@@ -4,9 +4,17 @@ import * as Yup from "yup";
 import { Row, Col, Dropdown, Button, Card } from "react-bootstrap";
 import { Formik, Form } from "formik";
 
-export default function InnerFormComponent({ formFields, initialValues,formSubmitValues,setformSubmitValues }) {
+export default function InnerFormComponent({
+  formFields,
+  initialValues,
+  formSubmitValues,
+  setformSubmitValues,
+  formSubmitted,
+  setformSubmitted,
+}) {
   const SubmitForm = (values) => {
     setformSubmitValues(values);
+    setformSubmitted(true);
   };
 
   const getComponent = (each, i, value, setFieldValue, error) => {
@@ -78,10 +86,10 @@ export default function InnerFormComponent({ formFields, initialValues,formSubmi
             <Dropdown.Divider />
           </Col>
         );
-        case "Heading":
+      case "Heading":
         return (
           <Col md="12" lg="12" xs="12" key={`${each.type}-${i}`}>
-           <h2>{each.heading}</h2>
+            <h2>{each.heading}</h2>
           </Col>
         );
       default:
@@ -168,13 +176,14 @@ export default function InnerFormComponent({ formFields, initialValues,formSubmi
     <>
       <Formik
         validateOnChange={false}
+        enableReinitialize
         initialValues={initialValues}
         validationSchema={portfolioDetailsSchema}
         onSubmit={(values, { validate }) => {
           SubmitForm(values);
         }}
       >
-        {({ values, errors, touched, handleSubmit, setFieldValue }) => (
+        {({ values, errors, handleSubmit, setFieldValue, handleReset }) => (
           <Form onSubmit={handleSubmit}>
             <Row col="12">
               {_.map(formFields, (each, i) =>
@@ -186,22 +195,27 @@ export default function InnerFormComponent({ formFields, initialValues,formSubmi
                   errors[each.name]
                 )
               )}
-              <Button color="primary" type="submit" block>
-                Submit
-              </Button>
+              <Col md="12" lg="12" xs="12">
+                <Row col="12">
+                  <Col md="6" lg="6" xs="12">
+                    <Button color="primary" onClick={handleReset} block>
+                      Reset
+                    </Button>
+                  </Col>
+                  <Col md="6" lg="6" xs="12">
+                    <Button color="primary" type="submit" block>
+                      Submit
+                    </Button>
+                  </Col>
+                </Row>
+              </Col>
             </Row>
           </Form>
         )}
       </Formik>
-      {!_.isEmpty(formSubmitValues) && (
-        <Card>
-          {_.map(Object.keys(initialValues), (each, i) => (
-            <text>
-              {each} : {formSubmitValues[each]}
-            </text>
-          ))}
-        </Card>
-      )}
+      {!_.isEmpty(formSubmitValues) && formSubmitted ? (
+        <Card>Data Submitted</Card>
+      ) : null}
     </>
   );
 }
