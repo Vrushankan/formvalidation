@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Form, Col } from "react-bootstrap";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function CustomEmailField({ placeholder, label }) {
   // Similar to componentDidMount and componentDidUpdate:
@@ -11,9 +12,9 @@ export default function CustomEmailField({ placeholder, label }) {
     <>
       <Form>
         <Form.Row col="12">
-          <Form.Group as={Col} controlId="formGridEmail">
+          <Form.Group as={Col} controlId="formGridDate">
             <Form.Label>{label}</Form.Label>
-            <Form.Control  type="email" placeholder={placeholder} />
+            <Form.Control  type="date" placeholder={placeholder} />
           </Form.Group>
         </Form.Row>
       </Form>

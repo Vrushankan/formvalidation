@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import _ from "lodash";
-import { Form, Row, Col } from "react-bootstrap";
+import { Form, Row, Col, Dropdown } from "react-bootstrap";
+import InnerFormComponent from "./InnerFormComponent";
 import CustomInputField from "./InputField";
 import CustomDropDownField from "./DropDown";
+import CustomEmailField from "./EmailField";
+import CustomDateField from "./DateField";
 
 export default function FormComponent() {
-  // const [count, setCount] = useState(0);
+  const [initialValues, setinitialValues] = useState({});
 
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
@@ -16,6 +19,7 @@ export default function FormComponent() {
     {
       type: "CustomDropDownField",
       placeholder: "Salutation",
+      name: "salutation",
       label: "Salutation",
       component: CustomDropDownField,
       options: [
@@ -36,48 +40,208 @@ export default function FormComponent() {
     {
       type: "CustomInputField",
       placeholder: "First name",
+      name: "first_name",
       label: "First name",
       component: CustomInputField,
     },
     {
       type: "CustomInputField",
       placeholder: "Middle name",
+      name: "middle_name",
       label: "Middle name",
       component: CustomInputField,
     },
     {
       type: "CustomInputField",
       placeholder: "Last Name",
+      name: "last_name",
       label: "Last Name",
       component: CustomInputField,
     },
+    {
+      type: "CustomDropDownField",
+      placeholder: "Gender",
+      name: "gender",
+      label: "Gender",
+      component: CustomDropDownField,
+      options: [
+        {
+          value: "male",
+          option: "Male",
+        },
+        {
+          value: "female",
+          option: "Female",
+        },
+        {
+          value: "other",
+          option: "Other",
+        },
+      ],
+    },
+    {
+      type: "CustomEmailField",
+      placeholder: "Email Id",
+      name: "email",
+      label: "Email Id",
+      component: CustomEmailField,
+    },
+    {
+      type: "CustomInputField",
+      placeholder: "Mobile",
+      name: "mobile",
+      label: "Mobile",
+      component: CustomInputField,
+    },
+    {
+      type: "CustomDateField",
+      label: "Date of Birth",
+      placeholder: "Date of Birth",
+      name: "dob",
+      component: CustomDateField,
+    },
+    {
+      type: "CustomInputField",
+      placeholder: "Occupation",
+      name: "occupation",
+      label: "Occupation",
+      component: CustomInputField,
+    },
+    {
+      type: "CustomInputField",
+      placeholder: "AnnualIncome",
+      name: "annual_income",
+      label: "AnnualIncome",
+      component: CustomInputField,
+    },
+    {
+      type: "CustomInputField",
+      placeholder: "Pan Card",
+      name: "pan_card",
+      label: "Pan Card",
+      component: CustomInputField,
+    },
+    {
+      type: "CustomDropDownField",
+      placeholder: "Marital Status",
+      name: "marital_status",
+      label: "Marital Status",
+      component: CustomDropDownField,
+      options: [
+        {
+          value: "married",
+          option: "Married",
+        },
+        {
+          value: "single",
+          option: "Single",
+        },
+      ],
+    },
+    {
+      type: "CustomInputField",
+      placeholder: "Height",
+      name: "height",
+      label: "Height",
+      component: CustomInputField,
+    },
+    {
+      type: "CustomInputField",
+      placeholder: "Weight",
+      name: "Weight",
+      label: "Weight",
+      component: CustomInputField,
+    },
+    {
+      type: "Devider",
+    },
+    {
+      type: "CustomInputField",
+      placeholder: "First name",
+      name: "first_name_nom",
+      label: "First name",
+      component: CustomInputField,
+    },
+    {
+      type: "CustomInputField",
+      placeholder: "Middle name",
+      name: "Middle name",
+      label: "Middle name",
+      component: CustomInputField,
+    },
+    {
+      type: "CustomInputField",
+      placeholder: "Last Name",
+      name: "last_name_nom",
+      label: "Last Name",
+      component: CustomInputField,
+    },
+    {
+      type: "CustomDropDownField",
+      placeholder: "Relationship",
+      name: "relationship",
+      label: "Relationship",
+      component: CustomDropDownField,
+      options: [
+        {
+          value: "Father",
+          option: "Father",
+        },
+        {
+          value: "Mother",
+          option: "Mother",
+        },
+        {
+          value: "Son",
+          option: "Son",
+        },
+        {
+          value: "Daughter",
+          option: "Daughter",
+        },
+        {
+          value: "Other",
+          option: "Other",
+        },
+      ],
+    },
+    {
+      type: "CustomDateField",
+      label: "Date of Birth",
+      placeholder: "dob_nom",
+      name: "Date of Birth",
+      component: CustomDateField,
+    },
+    {
+      type: "CustomDropDownField",
+      placeholder: "Gender",
+      name: "gender_nom",
+      label: "Gender",
+      component: CustomDropDownField,
+      options: [
+        {
+          value: "male",
+          option: "Male",
+        },
+        {
+          value: "female",
+          option: "Female",
+        },
+        {
+          value: "other",
+          option: "Other",
+        },
+      ],
+    },
   ];
+  
   return (
     <>
       <Form>
         <Row col="12">
           <Col md="2" lg="2" xs="0"></Col>
           <Col md="8" lg="8" xs="12">
-            <Row col="12">
-              {_.map(formFields, (each, i) =>
-                each.type === "CustomInputField" ? (
-                  <Col md="6" lg="6" xs="12" key={`${each.type}-${i}`}>
-                    <each.component
-                      placeholder={each.placeholder}
-                      label={each.label}
-                    />
-                  </Col>
-                ) : each.type === "CustomDropDownField" ? (
-                  <Col md="6" lg="6" xs="12" key={`${each.type}-${i}`}>
-                    <each.component
-                      placeholder={each.placeholder}
-                      label={each.label}
-                      options={each.options}
-                    />
-                  </Col>
-                ) : null
-              )}
-            </Row>
+            <InnerFormComponent formFields={formFields} />
           </Col>
           <Col></Col>
           <Col md="2" lg="2" xs="0"></Col>
