@@ -8,14 +8,17 @@ import CustomEmailField from "./EmailField";
 import CustomDateField from "./DateField";
 
 export default function FormComponent() {
-  const [initialValues, setinitialValues] = useState({});
-
+  const [formSubmitValues, setformSubmitValues] = useState({});
   // Similar to componentDidMount and componentDidUpdate:
   useEffect(() => {
     // Update the document title using the browser API
     document.title = `Form Validation`;
   });
   const formFields = [
+    {
+      type: "Heading",
+      heading: "Personal Details",
+    },
     {
       type: "CustomDropDownField",
       placeholder: "Salutation",
@@ -148,12 +151,16 @@ export default function FormComponent() {
     {
       type: "CustomInputField",
       placeholder: "Weight",
-      name: "Weight",
+      name: "weight",
       label: "Weight",
       component: CustomInputField,
     },
     {
       type: "Devider",
+    },
+    {
+      type: "Heading",
+      heading: "Nominee Details",
     },
     {
       type: "CustomInputField",
@@ -235,35 +242,52 @@ export default function FormComponent() {
     },
   ];
   const initials = {
-    salutation: "",
+    salutation: {
+      value: "Mr.",
+      option: "Mr.",
+    },
     first_name: "",
     middle_name: "",
     last_name: "",
-    gender: "",
+    gender: {
+      value: "male",
+      option: "Male",
+    },
     email: "",
     mobile: "",
     dob: "",
     occupation: "",
     annual_income: "",
     pan_card: "",
-    marital_status: "",
+    marital_status: {
+      value: "married",
+      option: "Married",
+    },
     height: "",
-    Weight: "",
+    weight: "",
     first_name_nom: "",
     middle_name_nom: "",
     last_name_nom: "",
-    relationship: "",
+    relationship: {
+      value: "Father",
+      option: "Father",
+    },
     dob_nom: "",
-    gender_nom: "",
+    gender_nom: {
+      value: "male",
+      option: "Male",
+    },
   };
   return (
     <>
-      <Row col="12">
+      <Row col="12" noGutters>
         <Col md="2" lg="2" xs="0"></Col>
         <Col md="8" lg="8" xs="12">
           <InnerFormComponent
             formFields={formFields}
             initialValues={initials}
+            formSubmitValues={formSubmitValues}
+            setformSubmitValues={setformSubmitValues}
           />
         </Col>
         <Col></Col>
